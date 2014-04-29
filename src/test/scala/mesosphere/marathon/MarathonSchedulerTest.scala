@@ -77,15 +77,14 @@ class MarathonSchedulerTest extends AssertionsForJUnit
 
     scheduler.resourceOffers(driver, offers)
 
-    val offersCaptor = ArgumentCaptor.forClass(classOf[java.util.List[OfferID]])
+    val offersCaptor = ArgumentCaptor.forClass(classOf[OfferID])
     val taskInfosCaptor = ArgumentCaptor.forClass(classOf[java.util.List[TaskInfo]])
     val marathonTaskCaptor = ArgumentCaptor.forClass(classOf[MarathonTask])
 
     verify(driver).launchTasks(offersCaptor.capture(), taskInfosCaptor.capture())
     verify(tracker).starting(same(app.id), marathonTaskCaptor.capture())
 
-    assertEquals(1, offersCaptor.getValue.size())
-    assertEquals(offer.getId, offersCaptor.getValue.get(0))
+    assertEquals(offer.getId, offersCaptor.getValue)
 
     assertEquals(1, taskInfosCaptor.getValue.size())
     val taskInfoPortVar = taskInfosCaptor.getValue.get(0).getCommand.getEnvironment
