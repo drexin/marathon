@@ -141,9 +141,9 @@ class MarathonSchedulerActorTest extends TestKit(ActorSystem("System"))
 
     when(repo.allIds()).thenReturn(Future.successful(Seq(app.id.toString)))
     when(tracker.get(app.id)).thenReturn(mutable.Set[MarathonTask](taskA))
-    when(tracker.fetchTask(app.id, taskA.getId))
-      .thenReturn(Some(taskA))
-      .thenReturn(None)
+    when(tracker.fetchApp(app.id))
+      .thenReturn(new TaskTracker.App(app.id, mutable.Set(taskA), false))
+      .thenReturn(new TaskTracker.App(app.id, mutable.Set(), false))
 
     when(repo.currentVersion(app.id))
       .thenReturn(Future.successful(Some(app)))

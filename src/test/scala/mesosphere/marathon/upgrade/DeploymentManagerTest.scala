@@ -9,7 +9,7 @@ import akka.util.Timeout
 import mesosphere.marathon.io.storage.StorageProvider
 import mesosphere.marathon.state.PathId._
 import mesosphere.marathon.state.{ AppDefinition, AppRepository, Group, MarathonStore }
-import mesosphere.marathon.tasks.{ TaskQueue, TaskTracker }
+import mesosphere.marathon.tasks.{ TaskIdUtil, TaskQueue, TaskTracker }
 import mesosphere.marathon.upgrade.DeploymentActor.Cancel
 import mesosphere.marathon.upgrade.DeploymentManager.{ CancelDeployment, PerformDeployment }
 import mesosphere.marathon.{ MarathonConf, SchedulerActions }
@@ -48,7 +48,7 @@ class DeploymentManagerTest
     eventBus = mock[EventStream]
     taskQueue = mock[TaskQueue]
     config = mock[MarathonConf]
-    taskTracker = new TaskTracker(new InMemoryState, config)
+    taskTracker = new TaskTracker(new InMemoryState, config, new TaskIdUtil)
     scheduler = mock[SchedulerActions]
     storage = mock[StorageProvider]
     appRepo = new AppRepository(new MarathonStore[AppDefinition](new InMemoryState, () => AppDefinition()))

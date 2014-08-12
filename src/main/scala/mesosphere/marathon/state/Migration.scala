@@ -6,9 +6,9 @@ import javax.inject.Inject
 import mesosphere.marathon.Protos.StorageVersion
 import mesosphere.marathon.state.PathId._
 import mesosphere.marathon.state.StorageVersions._
-import mesosphere.marathon.tasks.TaskTracker
+import mesosphere.marathon.tasks.{ TaskIdUtil, TaskTracker }
 import mesosphere.marathon.tasks.TaskTracker.App
-import mesosphere.marathon.{ BuildInfo, MarathonConf, StorageException }
+import mesosphere.marathon.{ MarathonConf, BuildInfo, StorageException }
 import mesosphere.util.BackToTheFuture.futureToFutureOption
 import mesosphere.util.ThreadPoolContext.context
 import mesosphere.util.{ BackToTheFuture, Logging }
@@ -23,6 +23,7 @@ class Migration @Inject() (
     appRepo: AppRepository,
     groupRepo: GroupRepository,
     config: MarathonConf,
+    taskIdUtil: TaskIdUtil,
     implicit val timeout: BackToTheFuture.Timeout = BackToTheFuture.Implicits.defaultTimeout) extends Logging {
 
   type MigrationAction = (StorageVersion, () => Future[Any])
@@ -95,21 +96,23 @@ class Migration @Inject() (
   }
 
   private def changeTasks(fn: App => App): Future[Any] = {
-    val taskTracker = new TaskTracker(state, config)
+    val taskTracker = new TaskTracker(state, config, taskIdUtil)
     def fetchApp(appId: PathId): Option[App] = {
       val bytes = state.fetch("tasks:" + appId.safePath).get().value
       if (bytes.length > 0) {
         val source = new ObjectInputStream(new ByteArrayInputStream(bytes))
-        val fetchedTasks = taskTracker.legacyDeserialize(appId, source)
+        val fetchedTasks = taskTracker.deserialize(appId, source)
         Some(new App(appId, fetchedTasks, false))
       }
       else None
     }
-    def store(app: App): Future[Seq[Variable]] = {
+    def store(app: App): Future[Variable] = {
       val oldVar = state.fetch("tasks:" + app.appName.safePath).get()
       val bytes = new ByteArrayOutputStream()
       val output = new ObjectOutputStream(bytes)
-      Future.sequence(app.tasks.toSeq.map(taskTracker.store(app.appName, _)))
+      taskTracker.serialize(app.appName, app.tasks, output)
+      val newVar = oldVar.mutate(bytes.toByteArray)
+      BackToTheFuture.futureToFuture(state.store(newVar))
     }
     appRepo.allPathIds().flatMap { apps =>
       val res = apps.flatMap(fetchApp).map{ app => store(fn(app)) }

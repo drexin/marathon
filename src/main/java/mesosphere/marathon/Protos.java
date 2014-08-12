@@ -12270,53 +12270,53 @@ public final class Protos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016marathon.proto\022\023mesosphere.marathon\032\013m" +
-      "esos.proto\"\243\001\n\nConstraint\022\r\n\005field\030\001 \002(\t" +
-      "\022:\n\010operator\030\002 \002(\0162(.mesosphere.marathon" +
-      ".Constraint.Operator\022\r\n\005value\030\003 \001(\t\";\n\010O" +
-      "perator\022\n\n\006UNIQUE\020\000\022\010\n\004LIKE\020\001\022\013\n\007CLUSTER" +
-      "\020\002\022\014\n\010GROUP_BY\020\003\"\322\002\n\025HealthCheckDefiniti" +
-      "on\022E\n\010protocol\030\001 \002(\01623.mesosphere.marath" +
-      "on.HealthCheckDefinition.Protocol\022\024\n\tpor" +
-      "tIndex\030\002 \002(\r:\0010\022\036\n\022gracePeriodSeconds\030\003 " +
-      "\001(\r:\00215\022\033\n\017intervalSeconds\030\004 \001(\r:\00210\022\032\n\016",
-      "timeoutSeconds\030\005 \001(\r:\00220\022\017\n\004path\030\006 \001(\t:\001" +
-      "/\022!\n\026maxConsecutiveFailures\030\007 \001(\r:\0013\022#\n\007" +
-      "command\030\010 \001(\0132\022.mesos.CommandInfo\"*\n\010Pro" +
-      "tocol\022\010\n\004HTTP\020\000\022\007\n\003TCP\020\001\022\013\n\007COMMAND\020\002\"\326\004" +
-      "\n\021ServiceDefinition\022\n\n\002id\030\001 \002(\t\022\037\n\003cmd\030\002" +
-      " \002(\0132\022.mesos.CommandInfo\022\021\n\tinstances\030\003 " +
-      "\002(\r\022\"\n\tresources\030\004 \003(\0132\017.mesos.Resource\022" +
-      "\023\n\013description\030\005 \001(\t\022\r\n\005ports\030\006 \003(\r\0224\n\013c" +
-      "onstraints\030\007 \003(\0132\037.mesosphere.marathon.C" +
-      "onstraint\022\022\n\010executor\030\010 \002(\t:\000\022>\n\022OBSOLET",
-      "E_container\030\n \001(\0132\".mesosphere.marathon." +
-      "ContainerInfo\022)\n\007version\030\013 \001(\t:\0301970-01-" +
-      "01T00:00:00.000Z\022@\n\014healthChecks\030\014 \003(\0132*" +
-      ".mesosphere.marathon.HealthCheckDefiniti" +
-      "on\022\025\n\007backoff\030\r \001(\003:\0041000\022\033\n\rbackoffFact" +
-      "or\030\016 \001(\001:\0041.15\022G\n\017upgradeStrategy\030\017 \001(\0132" +
-      "..mesosphere.marathon.UpgradeStrategyDef" +
-      "inition\022\024\n\014dependencies\030\020 \003(\t\022\021\n\tstoreUr" +
-      "ls\030\021 \003(\t\022\034\n\rrequire_ports\030\022 \001(\010:\005false\"\272" +
-      "\001\n\014MarathonTask\022\n\n\002id\030\001 \002(\t\022\014\n\004host\030\002 \001(",
-      "\t\022\r\n\005ports\030\003 \003(\r\022$\n\nattributes\030\004 \003(\0132\020.m" +
-      "esos.Attribute\022\021\n\tstaged_at\030\005 \001(\003\022\022\n\nsta" +
-      "rted_at\030\006 \001(\003\022#\n\010statuses\030\007 \003(\0132\021.mesos." +
-      "TaskStatus\022\017\n\007version\030\010 \001(\t\"M\n\013MarathonA" +
-      "pp\022\014\n\004name\030\001 \001(\t\0220\n\005tasks\030\002 \003(\0132!.mesosp" +
-      "here.marathon.MarathonTask\"1\n\rContainerI" +
-      "nfo\022\017\n\005image\030\001 \002(\014:\000\022\017\n\007options\030\002 \003(\014\")\n" +
-      "\020EventSubscribers\022\025\n\rcallback_urls\030\001 \003(\t" +
-      "\"=\n\016StorageVersion\022\r\n\005major\030\001 \002(\r\022\r\n\005min" +
-      "or\030\002 \002(\r\022\r\n\005patch\030\003 \002(\r\":\n\031UpgradeStrate",
-      "gyDefinition\022\035\n\025minimumHealthCapacity\030\001 " +
-      "\002(\001\"\260\001\n\017GroupDefinition\022\n\n\002id\030\001 \002(\t\022\017\n\007v" +
-      "ersion\030\002 \002(\t\0224\n\004apps\030\003 \003(\0132&.mesosphere." +
-      "marathon.ServiceDefinition\0224\n\006groups\030\004 \003" +
-      "(\0132$.mesosphere.marathon.GroupDefinition" +
-      "\022\024\n\014dependencies\030\005 \003(\tB\035\n\023mesosphere.mar" +
-      "athonB\006Protos"
+      "\n\016marathon.proto\022\023mesosphere.marathon\032\021m" +
+      "esos/mesos.proto\"\243\001\n\nConstraint\022\r\n\005field" +
+      "\030\001 \002(\t\022:\n\010operator\030\002 \002(\0162(.mesosphere.ma" +
+      "rathon.Constraint.Operator\022\r\n\005value\030\003 \001(" +
+      "\t\";\n\010Operator\022\n\n\006UNIQUE\020\000\022\010\n\004LIKE\020\001\022\013\n\007C" +
+      "LUSTER\020\002\022\014\n\010GROUP_BY\020\003\"\322\002\n\025HealthCheckDe" +
+      "finition\022E\n\010protocol\030\001 \002(\01623.mesosphere." +
+      "marathon.HealthCheckDefinition.Protocol\022" +
+      "\024\n\tportIndex\030\002 \002(\r:\0010\022\036\n\022gracePeriodSeco" +
+      "nds\030\003 \001(\r:\00215\022\033\n\017intervalSeconds\030\004 \001(\r:\002",
+      "10\022\032\n\016timeoutSeconds\030\005 \001(\r:\00220\022\017\n\004path\030\006" +
+      " \001(\t:\001/\022!\n\026maxConsecutiveFailures\030\007 \001(\r:" +
+      "\0013\022#\n\007command\030\010 \001(\0132\022.mesos.CommandInfo\"" +
+      "*\n\010Protocol\022\010\n\004HTTP\020\000\022\007\n\003TCP\020\001\022\013\n\007COMMAN" +
+      "D\020\002\"\326\004\n\021ServiceDefinition\022\n\n\002id\030\001 \002(\t\022\037\n" +
+      "\003cmd\030\002 \002(\0132\022.mesos.CommandInfo\022\021\n\tinstan" +
+      "ces\030\003 \002(\r\022\"\n\tresources\030\004 \003(\0132\017.mesos.Res" +
+      "ource\022\023\n\013description\030\005 \001(\t\022\r\n\005ports\030\006 \003(" +
+      "\r\0224\n\013constraints\030\007 \003(\0132\037.mesosphere.mara" +
+      "thon.Constraint\022\022\n\010executor\030\010 \002(\t:\000\022>\n\022O",
+      "BSOLETE_container\030\n \001(\0132\".mesosphere.mar" +
+      "athon.ContainerInfo\022)\n\007version\030\013 \001(\t:\03019" +
+      "70-01-01T00:00:00.000Z\022@\n\014healthChecks\030\014" +
+      " \003(\0132*.mesosphere.marathon.HealthCheckDe" +
+      "finition\022\025\n\007backoff\030\r \001(\003:\0041000\022\033\n\rbacko" +
+      "ffFactor\030\016 \001(\001:\0041.15\022G\n\017upgradeStrategy\030" +
+      "\017 \001(\0132..mesosphere.marathon.UpgradeStrat" +
+      "egyDefinition\022\024\n\014dependencies\030\020 \003(\t\022\021\n\ts" +
+      "toreUrls\030\021 \003(\t\022\034\n\rrequire_ports\030\022 \001(\010:\005f" +
+      "alse\"\272\001\n\014MarathonTask\022\n\n\002id\030\001 \002(\t\022\014\n\004hos",
+      "t\030\002 \001(\t\022\r\n\005ports\030\003 \003(\r\022$\n\nattributes\030\004 \003" +
+      "(\0132\020.mesos.Attribute\022\021\n\tstaged_at\030\005 \001(\003\022" +
+      "\022\n\nstarted_at\030\006 \001(\003\022#\n\010statuses\030\007 \003(\0132\021." +
+      "mesos.TaskStatus\022\017\n\007version\030\010 \001(\t\"M\n\013Mar" +
+      "athonApp\022\014\n\004name\030\001 \001(\t\0220\n\005tasks\030\002 \003(\0132!." +
+      "mesosphere.marathon.MarathonTask\"1\n\rCont" +
+      "ainerInfo\022\017\n\005image\030\001 \002(\014:\000\022\017\n\007options\030\002 " +
+      "\003(\014\")\n\020EventSubscribers\022\025\n\rcallback_urls" +
+      "\030\001 \003(\t\"=\n\016StorageVersion\022\r\n\005major\030\001 \002(\r\022" +
+      "\r\n\005minor\030\002 \002(\r\022\r\n\005patch\030\003 \002(\r\":\n\031Upgrade",
+      "StrategyDefinition\022\035\n\025minimumHealthCapac" +
+      "ity\030\001 \002(\001\"\260\001\n\017GroupDefinition\022\n\n\002id\030\001 \002(" +
+      "\t\022\017\n\007version\030\002 \002(\t\0224\n\004apps\030\003 \003(\0132&.mesos" +
+      "phere.marathon.ServiceDefinition\0224\n\006grou" +
+      "ps\030\004 \003(\0132$.mesosphere.marathon.GroupDefi" +
+      "nition\022\024\n\014dependencies\030\005 \003(\tB\035\n\023mesosphe" +
+      "re.marathonB\006Protos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

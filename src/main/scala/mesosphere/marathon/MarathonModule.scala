@@ -21,7 +21,7 @@ import mesosphere.marathon.state._
 import mesosphere.marathon.tasks.{ TaskIdUtil, TaskQueue, TaskTracker }
 import mesosphere.mesos.util.FrameworkIdUtil
 import org.apache.log4j.Logger
-import org.apache.mesos.state.{ State, ZooKeeperState }
+import org.apache.mesos.state.{ LogState, State }
 import org.apache.zookeeper.ZooDefs
 
 object ModuleNames {
@@ -68,11 +68,13 @@ class MarathonModule(conf: MarathonConf, http: HttpConf, zk: ZooKeeperClient)
   @Provides
   @Singleton
   def provideMesosState(): State = {
-    new ZooKeeperState(
+    new LogState(
       conf.zkHosts,
       conf.zkTimeoutDuration.toMillis,
       TimeUnit.MILLISECONDS,
-      conf.zooKeeperStatePath
+      "/mesos/log_replicas",
+      1,
+      "/tmp/repllog"
     )
   }
 
@@ -156,8 +158,8 @@ class MarathonModule(conf: MarathonConf, http: HttpConf, zk: ZooKeeperClient)
 
   @Provides
   @Singleton
-  def provideMigration(state: State, appRepo: AppRepository, groupRepo: GroupRepository, config: MarathonConf): Migration =
-    new Migration(state, appRepo, groupRepo, config)
+  def provideMigration(state: State, appRepo: AppRepository, groupRepo: GroupRepository, config: MarathonConf, taskIdUtil: TaskIdUtil): Migration =
+    new Migration(state, appRepo, groupRepo, config, taskIdUtil)
 
   @Provides
   @Singleton
